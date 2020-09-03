@@ -1,3 +1,5 @@
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,16 +13,6 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int _counter = 0;
-  int _counter_2 = 0; // 2nd counter
-
-  int _updateCounter(int _counter) {
-   print( '_counter before increment in function: ' + _counter.toString());
-    _counter = _counter + 1;
-    print(
-        '_counter in function: ' + _counter.toString()); // not getting updated?
-
-    return _counter;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,32 +22,58 @@ class _MyAppState extends State<MyApp> {
               title: Text('Counter'),
             ),
             body: Container(
-                child: Center(
-              child: Column(
-                children: <Widget>[
-                  Text(_counter_2.toString()),
-                  //increment using second counter, does not work
-                  SizedBox(height: 20),
+                alignment: Alignment.center,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      width: 100,
+                      height: 40,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            style: BorderStyle.solid,
+                            width: 1.5,
+                          ),
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.amber.withOpacity(.25),
+                              offset: Offset(0,0),
+                              blurRadius: 5,
+                              spreadRadius: 5,
+                            )
+                          ],
+                        ),
+                        child: Center(
+                          child: Text(_counter.toString(),
+                              style: TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                              ),),
+                        ),
+                      ),
+                    ),
 
-                  RaisedButton(
-                    onPressed: () {
-                      setState(() {
-                        //_counter++;
-                        _counter_2  = _updateCounter(
-                            _counter); // this does not seem to work!
-                        _counter = _counter_2;//edit: This updates the global variable and hence solves the issue:)
-                      });
 
-                      print('_counter in RaisedButton: ' +
-                          _counter.toString()); // strange behaviour here!
-                      print('_counter_2 in RaisedButton: ' +
-                          _counter_2.toString()); // strange behaviour here!
-                    },
-                    color: Colors.blue,
-                    child: Text('+'),
-                  ),
-                ],
-              ),
-            ))));
+                    SizedBox(height: 20),
+                    ButtonTheme(
+                      minWidth: 100,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        side: BorderSide(color: Colors.red),
+                      ),
+                      child: RaisedButton(
+                        onPressed: () {
+                          setState(() {
+                            _counter++;
+                          });
+                        },
+                        color: Colors.blue,
+                        child: Text('+'),
+                      ),
+                    ),
+                  ],
+                ))));
   }
 }
