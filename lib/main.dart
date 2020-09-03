@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -39,23 +38,23 @@ class _MyAppState extends State<MyApp> {
                           boxShadow: [
                             BoxShadow(
                               color: Colors.amber.withOpacity(.25),
-                              offset: Offset(0,0),
+                              offset: Offset(0, 0),
                               blurRadius: 5,
                               spreadRadius: 5,
                             )
                           ],
                         ),
                         child: Center(
-                          child: Text(_counter.toString(),
-                              style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                              ),),
+                          child: Text(
+                            _counter.toString(),
+                            style: TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ),
                     ),
-
-
                     SizedBox(height: 20),
                     ButtonTheme(
                       minWidth: 100,
@@ -63,16 +62,33 @@ class _MyAppState extends State<MyApp> {
                         borderRadius: BorderRadius.circular(8),
                         side: BorderSide(color: Colors.red),
                       ),
-                      child: RaisedButton(
+                      child: RaisedButton.icon(
                         onPressed: () {
                           setState(() {
                             _counter++;
                           });
-                        },
+                        },icon: Icon(Icons.control_point), label: Text('Increment'),
                         color: Colors.blue,
-                        child: Text('+'),
                       ),
                     ),
+                    SizedBox(
+                      height: 20,
+                    ),
+
+                    ButtonTheme(
+                      minWidth: 100,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        side: BorderSide(color:Colors.red),
+                      ),
+                      buttonColor: Colors.blue,
+                      splashColor: Colors.amber,
+                      child: RaisedButton.icon(onPressed: (){
+                        setState(() {
+                          _counter--;
+                        });
+                      }, icon: Icon(Icons.remove), label: Text('Decrement')),
+                    )
                   ],
                 ))));
   }
